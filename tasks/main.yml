@@ -1,0 +1,28 @@
+---
+- name: Install NFS server
+  tags:
+    - nfs
+    - nfs_server
+  become: true
+  block:
+    - name: Install
+      apt:
+        name: nfs-server
+        update_cache: true
+
+    - name: Configure service
+      service:
+        name: nfs-server
+        state: started
+        enabled: true
+      register: nfs_service
+
+    - name: Configure exports
+      blockinfile:
+        path: /etc/exports
+        block: "{{ lookup('template', 'exports.j2') }}"
+        marker: "# {mark} ANSIBLE MANAGED BLOCK {{ item.key }}"
+      loop: "{{ nfs_exports | dict2items }}"
+      loop_control:
+        label: "{{ item.key }}"
+      notify: Reload NFS server

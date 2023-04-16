@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include joenyland.nfs_server"
+      include_role:
+        name: "joenyland.nfs_server"

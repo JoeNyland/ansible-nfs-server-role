@@ -1,0 +1,6 @@
+---
+- name: Reload NFS server
+  service:
+    name: nfs-server
+    state: reloaded
+  when: nfs_service.enabled

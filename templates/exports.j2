@@ -1,0 +1,1 @@
+{{item.key}}  {% if 'default_permissions' in item.value%}-{{ item.value.default_permissions | join(',')}} {% endif %}{% for client in item.value.client_permissions | default({}) %}{{client}}({{item.value.client_permissions[client] | join(',')}}) {% endfor %}
