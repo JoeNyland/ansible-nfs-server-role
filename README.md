@@ -28,7 +28,7 @@ Example Playbook
 ```yaml
 - hosts: server
   roles:
-    - role: joenyland.nfs
+    - role: joenyland.nfs_server
       vars:
         nfs_exports:
           /home:
